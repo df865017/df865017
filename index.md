@@ -15,6 +15,9 @@
 
 
 
+
+
+
 ## 工作算法
 ---
 
@@ -24,6 +27,11 @@
 
 
 #### 2.2 Transformer模型优化
+##### 2.2.1 Tokenization
+  电商排序不同类型/不同维度/不同长度的特征经过Tokenization后，统一转化为同一维度（例如 64/128/256）的可交互的Feature Token向量，方便后续排序模型（Transformer, RankerMixer, OneTrans）使用和运算。
+
+
+
 ---
 
 
