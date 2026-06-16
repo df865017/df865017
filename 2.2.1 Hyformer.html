@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>index</title>
+      <title>2.2.1 Hyformer</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -26,22 +26,102 @@
     <body for="html-export">
       <div class="crossnote markdown-preview  ">
       
-<p>作者多年来在互联网大厂深耕和打磨搜广推算法技术，并进行总结和分享。基于个人工作和学习内容，整体出学习笔记。供个人学习使用，非本人同意不得应用于商业领域。图片加载需要开启VPN，否则图片不可见。</p>
-<hr>
-<h2 id="书籍学习">书籍学习 </h2>
-<hr>
-<h4 id="11-书籍大模型应用">1.1 书籍大模型应用 </h4>
-<hr>
-<h2 id="工作算法">工作算法 </h2>
-<hr>
-<h4 id="21-强化学习应用">2.1 强化学习应用 </h4>
-<hr>
-<h4 id="22-transformer模型优化">2.2 Transformer模型优化 </h4>
-<h5 id="221-tokenization22120tokenizationhtml"><a href="2.2.1%20Tokenization.html">2.2.1 Tokenization</a> </h5>
-<p>电商排序不同类型/不同维度/不同长度的特征经过Tokenization后，统一转化为同一维度（例如 64/128/256）的可交互的Feature Token向量，方便后续排序模型（Transformer, RankerMixer, OneTrans）使用和运算。</p>
-<h5 id="222-hyformer22220hyformerhtml"><a href="2.2.2%20Hyformer.html">2.2.2 Hyformer</a> </h5>
-<p>Hyformer模型打破传统「先序列压缩、后特征交叉」的两阶段串行范式，用统一 Transformer 骨干实现双向、深层、早阶段的序列-特征交互。</p>
-<hr>
+<h4 id="222-01-理论部分">2.2.2-01 理论部分 </h4>
+<h5 id="1论文思想和解决问题">（1）论文思想和解决问题 </h5>
+<p><strong>论文思想</strong>：字节跳动 TikTok 搜索团队，SIGIR 2026 发表的论文HyFormer: Revisiting the Roles of Sequence Modeling and Feature Interaction in CTR Prediction。论文打破了传统「先序列压缩、后特征交叉」的两阶段串行范式，用统一 Transformer 骨干实现双向、深层、早阶段的序列-特征交互。</p>
+<p>**核心解决问题：**工业界经典精排链路（如 LONGER + RankMixer）遵循「序列建模 → 特征交叉」的串行两阶段流程，HyFormer 论文明确指出其三大本质问题。</p>
+<ul>
+<li>交互延迟且浅层：序列信息先被压缩成 1 个/少量向量，再和静态特征拼接做交叉，跨模态（序列/静态）的细粒度依赖无法被捕捉，早期层的表示无法受益于跨域上下文。</li>
+<li>缩放效率低下：增加模型深度、序列长度时，只能单独提升序列模块或交叉模块，无法转化为联合表示的增益，算力投入的收益边际递减。</li>
+<li>信息流单向：只有序列信息流向特征交叉模块，全局特征无法反向指导序列建模的注意力聚焦，序列建模缺少上下文约束。</li>
+</ul>
+<h5 id="2核心设计模块">（2）核心设计模块 </h5>
+<ul>
+<li>HyFormer 全称为 Hybrid Transformer，核心是以 Global Query Tokens 为语义桥梁，将序列建模与特征交叉统一到同一个 Transformer 骨干中，通过「解码-增强」交替迭代的方式，实现双向深度融合。</li>
+<li><strong>模块1: 初始全局查询生成（ Query Generation）</strong>
+<ul>
+<li>从原始异构特征中生成初始的 Global Query Tokens，作为后续序列解码与特征交叉的共享载体。
+<ul>
+<li>NS Tokens（Non-Sequence Tokens）：分组 Token 化后的异构静态特征（用户属性、商品属性、交叉特征等，对应你代码的分组投影结果）；</li>
+<li>各行为序列的均值池化结果：点击/加购/购买等多条序列先做全局池化，提供初始序列上下文。</li>
+<li>将两者拼接后，通过轻量 MLP 生成多组初始 Query Token（每条行为序列对应 Nq 个 Query Token）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>模块2: 序列交叉注意力解码（Query Decoding）</strong>
+<ul>
+<li>当前层的 Query Tokens 作为查询，对长行为序列做 Cross-Attention，把序列信息注入到 Query 中，完成序列建模。
+<ul>
+<li>多序列独立解码：不同类型的行为序列（点击、加购、购买、会话）各自独立做 Cross-Attention，不直接拼接，避免语义混淆；</li>
+<li>门控机制：使用 sigmoid 门控控制序列信息的注入强度，适配稀疏序列（如购买序列有效长度很短）的场景；</li>
+<li>因果约束 + RoPE：序列侧自注意力强制因果掩码，搭配旋转位置编码，防止位置信息泄露导致 AUC 虚高。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>模块3: 异构特征混合增强（Query Decoding）</strong>
+<ul>
+<li>将更新后的 Query Tokens 与 NS Tokens 拼接，通过高效 Token 混合（RankMixer 式 FFN）做全域特征交叉，用全局特征反向增强 Query 的表达。
+<ul>
+<li>
+<ol>
+<li>把所有序列的 Query Token + NS Token 在 Token 维度拼接；</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>通过 Pre-LN + FFN + Post-Norm 的结构做 Token 级特征混合；</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>输出再拆分为各序列 Query Token 和 NS Token，进入下一层 Block。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>模块4: 完整执行流程</strong>
+<ul>
+<li>每一层 HyFormer Block 按固定顺序执行，形成「序列解码 → 特征增强」的交替迭代。** **
+<ul>
+<li><strong>序列自注意力演化：各行为序列先做因果自注意力，更新序列自身的表示；</strong></li>
+<li><strong>Query 解码：各序列的 Query Token 对对应序列做 Cross-Attention，吸收序列信息；</strong></li>
+<li><strong>Query 增强：所有 Query + NS Token 拼接后做 Token 混合，完成全域特征交叉；</strong></li>
+<li><strong>拆分输出：将混合结果拆回 Query Token 与 NS Token，传入下一层。</strong></li>
+<li><strong>堆叠多层 Block 后，最终的 Query + NS Token 组成 Summary Memory，作为后续Decoder 的 Cross-Attention 记忆输入。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="3核心创新点">（3）核心创新点 </h5>
+<pre class="language-text">- 1. 范式升级：从「单向两阶段」升级为「双向交替迭代」，序列与特征交互更早、更深、更充分；
+- 2. 缩放效率提升：增加层数/参数时，序列建模和特征交叉同时受益，算力转化效率远高于两阶段架构；
+- 3. 多序列友好：天然支持多条异构行为序列，避免序列拼接带来的语义稀释；
+- 4. 工业落地友好：基于 Cross-Attention 而非全量 Self-Attention，推理时延可控，符合线上精排的时延约束。
+</pre>
+<h5 id="3参考论文">（3）参考论文 </h5>
+<p>（1）RankMixer: Scaling Up Ranking Models in Industrial Recommenders</p>
+<ul>
+<li>发表方：字节跳动，arXiv 2025</li>
+<li>核心贡献：提出 Token-based 统一排序架构，用多头 Token Mixing 替代二次复杂度的自注意力，兼顾 Transformer 的高并行性与工业界的强时延约束，可支撑十亿级参数缩放。</li>
+<li>明确了「异构特征 → 语义分组 → 独立投影 → 统一 Token 序列」的工业界标准化流程；</li>
+</ul>
+<p>（2）OneTrans: Unified Feature Interaction and Sequence Modeling with One Transformer</p>
+<ul>
+<li>发表方：字节跳动，WWW 2026</li>
+<li>核心贡献：首个用单个 Transformer 统一序列建模与特征交叉的工业级工作；HyFormer 在此基础上优化了 Latent Query 设计与交替架构，解决了 OneTrans 多序列效果差的问题。</li>
+</ul>
+<p>（4）HHFT: Hierarchical Heterogeneous Feature Transformer for Recommendation Systems</p>
+<ul>
+<li>发表方：阿里巴巴（淘宝天猫），arXiv 2025</li>
+<li>核心贡献：分层异构特征 Transformer，按语义划分特征块，使用块专属的 QKV 投影避免不同语义空间的特征混淆。提出「语义特征分区」思想，与 HyFormer 的分组 Token 化思路形成呼应。</li>
+<li>提出「语义特征分区」思想，是分组 Token 化的进阶版本；验证了异构特征混洗会导致语义稀释，从理论上</li>
+</ul>
+<h4 id="221-02-实验部分">2.2.1-02 实验部分 </h4>
 
       </div>
       
