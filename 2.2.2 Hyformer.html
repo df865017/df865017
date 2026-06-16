@@ -85,7 +85,7 @@
 </li>
 <li><strong>模块4: 完整执行流程</strong>
 <ul>
-<li>每一层 HyFormer Block 按固定顺序执行，形成「序列解码 → 特征增强」的交替迭代。** **
+<li>每一层 HyFormer Block 按固定顺序执行，形成「序列解码 → 特征增强」的交替迭代。
 <ul>
 <li><strong>序列自注意力演化：各行为序列先做因果自注意力，更新序列自身的表示；</strong></li>
 <li><strong>Query 解码：各序列的 Query Token 对对应序列做 Cross-Attention，吸收序列信息；</strong></li>
@@ -98,11 +98,28 @@
 </li>
 </ul>
 <h5 id="3核心创新点">（3）核心创新点 </h5>
-<pre class="language-text">- 1. 范式升级：从「单向两阶段」升级为「双向交替迭代」，序列与特征交互更早、更深、更充分；
-- 2. 缩放效率提升：增加层数/参数时，序列建模和特征交叉同时受益，算力转化效率远高于两阶段架构；
-- 3. 多序列友好：天然支持多条异构行为序列，避免序列拼接带来的语义稀释；
-- 4. 工业落地友好：基于 Cross-Attention 而非全量 Self-Attention，推理时延可控，符合线上精排的时延约束。
-</pre>
+<ul>
+<li>
+<ol>
+<li>范式升级：从「单向两阶段」升级为「双向交替迭代」，序列与特征交互更早、更深、更充分；</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>缩放效率提升：增加层数/参数时，序列建模和特征交叉同时受益，算力转化效率远高于两阶段架构；</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>多序列友好：天然支持多条异构行为序列，避免序列拼接带来的语义稀释；</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>工业落地友好：基于 Cross-Attention 而非全量 Self-Attention，推理时延可控，符合线上精排的时延约束。</li>
+</ol>
+</li>
+</ul>
 <h5 id="3参考论文">（3）参考论文 </h5>
 <p>（1）RankMixer: Scaling Up Ranking Models in Industrial Recommenders</p>
 <ul>
