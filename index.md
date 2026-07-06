@@ -33,6 +33,7 @@
 ##### [2.2.2 Hyformer](2.2.2%20Hyformer.html)
 Hyformer模型打破传统「先序列压缩、后特征交叉」的两阶段串行范式，用统一 Transformer 骨干实现双向、深层、早阶段的序列-特征交互。
 
+##### [2.2.3 Infer_Optimization](2.2.3%20Infer_Optimization.html)
 
 
 ---
