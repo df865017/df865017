@@ -794,7 +794,7 @@ body {
 </div></code></pre>
 <p>y_g = x_g / (EMA_{RMS_{g}} + epsilon) * scale_g</p>
 <ul>
-<li><font style="color:rgb(0, 0, 0);">scale_g </font>: 为可学习缩放参数。</li>
+<li>scala_g: 为可学习缩放参数。</li>
 <li>EMA_RMS_g: 特征组取值的RMS统计。</li>
 </ul>
 <p>该模块在输入投影前完成细粒度的尺度适配，使模型更关注特征内容和有效交叉关系，减少稀疏特征的梯度受高维特征主导影响的问题。</p>
