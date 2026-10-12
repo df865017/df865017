@@ -833,6 +833,43 @@ body {
 </ul>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>对比口径</strong></th>
+<th style="text-align:center"><strong>离线 rerank PVP AUC</strong></th>
+<th style="text-align:center"><strong>离线 rerank PVP AUC Uplift</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>冷启动基线</strong></td>
+<td style="text-align:center">0.9242</td>
+<td style="text-align:center">0.00</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Tokenization 版本</strong></td>
+<td style="text-align:center">0.9259</td>
+<td style="text-align:center"><font style="color:#DF2A3F;">+0.17pt</font></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Tokenization 版本+ GroupEnergyNorm</strong></td>
+<td style="text-align:center">0.9264</td>
+<td style="text-align:center"><font style="color:#DF2A3F;">+0.22pt</font></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Tokenization 版本+ GroupEnergyNorm+GatedAttn</strong></td>
+<td style="text-align:center">0.9269</td>
+<td style="text-align:center"><font style="color:#DF2A3F;">+0.27pt</font></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>相对线上老汤模型</strong></td>
+<td style="text-align:center"><font style="color:#DF2A3F;"></font></td>
+<td style="text-align:center"><font style="color:#DF2A3F;">+0.07pt</font></td>
+</tr>
+</tbody>
+</table>
+<p><strong>离线收益主要来自两方面：</strong>(1) 异构特征按业务语义 Token 化，并通过组级能量归一化改善特征尺度；(2) 通过 X/Q/K 三层门控降低噪声交互，增强候选查询和历史候选信息的有效表达。</p>
 
     </div>
 </body>
