@@ -746,14 +746,7 @@ body {
 <ol start="2">
 <li>提升全域下单 hitrate指标：非搜索域成交样本（not_search_pay 下图红色线）的打分应尽可能高于搜索域负样本（search_pv_not_pay 下图紫色线），但低于搜索域正样本（search_pay 下图黑色线），从而在不破坏搜索域排序的前提下，提升全域成交商品的下单 hitrate** <strong>和</strong> <strong>GMV-NDCG</strong> **指标。</li>
 </ol>
-<ul>
-<li>
-<p><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd53042f16f1caf6776e422c61cfaff78dbda715b8074147e408027c2d4f80cf8e8277798043020e25f4db4fb4c8ed7016461c?tmpCode=6fd72cab-f85f-433e-a309-b8e98d98510a" alt=""></p>
-</li>
-<li>
-<p><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd530469a747eb35216a4f706369398d4a51127ab49ace77d1ae39531ada58274810856ee8cdd73490bb2c4fb4c8ed7016461c?tmpCode=47eb7324-d6cc-4684-aa67-9a37eff0eb61" alt=""></p>
-</li>
-</ul>
+<p><img src="image/2.1.1Full-domainRL/1792894289910.png" alt="1792894289910"></p>
 </li>
 </ul>
 </li>
@@ -797,10 +790,8 @@ body {
 <li>
 <p>(4) GRPO Loss ：</p>
 </li>
-<li></li>
-<li></li>
 <li>
-<p><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd5304fb827cb336ed883bb9f329e6b0e0725c4a49305041d910a7aa76b82a78112f590bc1b294d7a075504fb4c8ed7016461c?tmpCode=c5c18774-25f7-4e47-8b0e-aa151d59b280" alt="img"></p>
+<p><img src="image/2.1.1Full-domainRL/1792894317494.png" alt="1792894317494"></p>
 </li>
 <li>
 <ul>
@@ -815,8 +806,8 @@ body {
 <ul>
 <li>
 <p>(5) SAPO Loss ：</p>
+<p><img src="image/2.1.1Full-domainRL/1792894332788.png" alt="1792894332788"></p>
 <ul>
-<li><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd5304c88bfb43e72218612d48618fc5dc84e6dd24ac2e7219caa07bd81f7c56979d0701fdd4f8e5a1814f4fb4c8ed7016461c?tmpCode=3d6bccae-08a5-4846-be70-b9619dece841" alt="img"></li>
 <li></li>
 <li>方案：采用 SAPO（Self-Adaptive Preference Optimization）Loss，在 GRPO 基础上引入 KL 约束和自适应偏好优化，试图在搜索域和非搜域之间取得更好平衡。</li>
 <li>离线指标：rerank_pvp 下降 -0.0012，hitrate10 大幅提升** **+0.1233。</li>
@@ -979,14 +970,14 @@ body {
 <li>
 <p>AUC离线指标监控：对于线上基线，rerank_pvp_auc涨+0.04pt（0521开始，蓝色线高于橙色线）。</p>
 <ul>
-<li><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd530456df6fc0fd4635824a88e24a090f8607f4b56e6ef06db468ef614ed191e7a2a5f765545854343ff34fb4c8ed7016461c?tmpCode=93fc47fc-420c-4199-9dbd-73d4db832f3b" alt=""></li>
+<li><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd530456df6fc0fd4635824a88e24a090f8607f4b56e6ef06db468ef614ed191e7a2a5f765545854343ff34fb4c8ed7016461c?tmpCode=8ac1b1de-9c69-450d-89cc-c4e657276516" alt=""></li>
 </ul>
 </li>
 <li>
 <p>全域下单hitrate1离线指标监控：稳定涨+2pt+。</p>
 </li>
 </ul>
-<p><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd5304d28a395b16a26cf9c59ffb396a6ec8497eb2e0edfb1b203f5975dbcd9ebd08aa646f83e31a831dd94fb4c8ed7016461c?tmpCode=93fc47fc-420c-4199-9dbd-73d4db832f3b" alt=""></p>
+<p><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd5304d28a395b16a26cf9c59ffb396a6ec8497eb2e0edfb1b203f5975dbcd9ebd08aa646f83e31a831dd94fb4c8ed7016461c?tmpCode=0b053ea3-06dc-450d-9560-eef7956dffb5" alt=""></p>
 <h4 id="2.3%E3%80%81%E5%85%A8%E5%9F%9F%E5%BB%BA%E6%A8%A1%E5%9C%A8%E7%BA%BF%E5%AE%9E%E9%AA%8C" tabindex="-1">2.3、全域建模在线实验</h4>
 <ul>
 <li>
@@ -994,10 +985,13 @@ body {
 <ul>
 <li>sapo模型+pcoc合页损失（打压高估样本）
 <ul>
-<li>\begin{align} L_{\text{SAPO}}(\theta) &amp;= -\mathbb{E}\left[\frac{1}{G}\sum_{i=1}^{G} \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)} A_i \cdot \tau(A_i) \right] + \beta D_{\text{KL}}(\pi_\theta \parallel \pi_{\text{ref}}) \ + \alpha * pcoc_\text{loss} \end{align} \ pcoc_\text{loss} = (max((\text{rerank_pvp}<em>\text{pred} - \text{rerank_pvp}</em>\text{label}),0.0))</li>
-<li>pcoc在线指标：(27桶实验桶 ｜34桶基准桶)
+<li>
+<p>\begin{align} L_{\text{SAPO}}(\theta) &amp;= -\mathbb{E}\left[\frac{1}{G}\sum_{i=1}^{G} \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)} A_i \cdot \tau(A_i) \right] + \beta D_{\text{KL}}(\pi_\theta \parallel \pi_{\text{ref}}) \ + \alpha * pcoc_\text{loss} \end{align} \ pcoc_\text{loss} = (max((\text{rerank_pvp}<em>\text{pred} - \text{rerank_pvp}</em>\text{label}),0.0))</p>
+</li>
+<li>
+<p>pcoc在线指标：(27桶实验桶 ｜34桶基准桶)</p>
 <ul>
-<li><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd530469bb08cdfcaab835c83886c6adf980197e4a8af156f62f8e1f97472913691d7172660bd809137de44fb4c8ed7016461c?tmpCode=68458c02-e7b3-4239-bfe4-b059cd4c678e" alt=""></li>
+<li><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd530469bb08cdfcaab835c83886c6adf980197e4a8af156f62f8e1f97472913691d7172660bd809137de44fb4c8ed7016461c?tmpCode=d25d8c83-9508-431c-91d2-5ab9bf2e29c8" alt="img"></li>
 </ul>
 </li>
 </ul>
@@ -1007,42 +1001,18 @@ body {
 <li>
 <p>全域模型实验：</p>
 <ul>
-<li>搜索流量指标：六国 20%流量 3天（0418～0420） GMV** <strong>0.35%</strong> <strong>Order</strong> **0.24%</li>
-<li><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd53049cda7df864dbe407edb0828394340034b25ba884a53394247c7f3adccd066075ade482de4a57db0c4fb4c8ed7016461c?tmpCode=68458c02-e7b3-4239-bfe4-b059cd4c678e" alt=""></li>
-<li>搜索域流量指标拆解：
+<li>
+<p>搜索流量指标：六国 20%流量 3天（0418～0420） GMV** <strong>0.73%</strong> <strong>Order</strong> **0.52%</p>
+</li>
+<li>
+<p>搜索域流量指标拆解：</p>
 <ul>
 <li>搜索域流量下单Order = 搜索域内立即下单Order + 非搜域下单Order
 <ul>
-<li>通过Apollo看板可以统计，当前搜索域流量下单渠道在搜索域还是非搜域。看板统计非搜域下单Order只占大盘18.3%（11938/65203=18.3%）。非搜域渠道下单Order上涨1.56%** **对全域渠道下单Order提升幅度小0.28%。</li>
-<li><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd53044d6872c9626e9f00c158261ed9c282c3532f6d0afb269c961653f0444a983cb57a9dc711387938684fb4c8ed7016461c?tmpCode=68458c02-e7b3-4239-bfe4-b059cd4c678e" alt=""></li>
+<li>通过Apollo看板可以统计，当前搜索域流量下单渠道在搜索域还是非搜域。看板统计非搜域下单Order只占大盘18.3%（11938/65203=18.3%）。非搜域渠道下单Order上涨1.96%** **对全域渠道下单Order提升幅度小0.52%。</li>
+<li><img src="image/2.1.1Full-domainRL/1792894447936.png" alt="1792894447936"></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="1.4%E3%80%81%E5%85%A8%E5%9F%9F%E5%BB%BA%E6%A8%A1%E9%A1%B9%E7%9B%AE%E9%9A%BE%E7%82%B9" tabindex="-1">1.4、全域建模项目难点</h5>
-<ul>
-<li>
-<p>非搜域收益向全域收益的传导效率偏低</p>
-<ul>
-<li>搜索流量的非搜域渠道下单Order上涨1.56%** **对全域渠道下单Order提升幅度小0.28%。由于非搜域下单占比是18.3%，导致非搜域提升在全域口径下收益明显稀释。</li>
-</ul>
-</li>
-<li>
-<p>全域提分对搜索域校准产生跨域扰动</p>
-<ul>
-<li>
-<p>全域模型预估的模型流量分提升后，搜索样本的 PCOC 偏大，且高于基线桶。当请求同时包含全域内容时，分数变化会影响搜索样本的预估与校准表现。</p>
-<ul>
-<li><img src="https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde51201f1430917b7311fb3f16fe41212a875b8339e1c4c24831b75b38faadcd24bec177c308ebd53047a093939e28703dedcd277f7431f0b5031ca9014caaa9c04d9c8718f604035441ffbd2589318b02f4fb4c8ed7016461c?tmpCode=68458c02-e7b3-4239-bfe4-b059cd4c678e" alt=""></li>
-</ul>
-</li>
-<li>
-<p>目前解决方法是：纠偏需要抑制搜索样本的 PCOC 高估，同时不能破坏全域模型已取得的模型hitrate指标提升。sapo模型+pcoc合页损失（打压高估样本）</p>
-<ul>
-<li>\begin{align} L_{\text{SAPO}}(\theta) &amp;= -\mathbb{E}\left[\frac{1}{G}\sum_{i=1}^{G} \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)} A_i \cdot \tau(A_i) \right] + \beta D_{\text{KL}}(\pi_\theta \parallel \pi_{\text{ref}}) \ + \alpha * pcoc_\text{loss} \end{align} \ pcoc_\text{loss} = (max((\text{rerank_pvp}<em>\text{pred} - \text{rerank_pvp}</em>\text{label}),0.0))</li>
 </ul>
 </li>
 </ul>
