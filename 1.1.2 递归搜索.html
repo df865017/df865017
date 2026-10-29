@@ -777,8 +777,47 @@ body {
       
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(res1, res2)
 </div></code></pre>
-<p>3、最长无重复子串</p>
-<h5 id="3%E3%80%81%E6%9C%80%E9%95%BF%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2" tabindex="-1">3、最长无重复子串</h5>
+<h5 id="200%E3%80%81%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F" tabindex="-1">200、岛屿数量</h5>
+<p><a href="https://leetcode.cn/problems/number-of-islands/">leetcode.cn/problems/number-of-islands</a></p>
+<p><img src="image/1.1.2递归搜索/1793263581773.png" alt="1793263581773"></p>
+<pre class='hljs'><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">numIslands</span>(<span class="hljs-params">self, grid: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]]</span>) -&gt; <span class="hljs-built_in">int</span>:
+
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;grid:&quot;</span>, grid)
+        see = [ [<span class="hljs-number">0</span>] * <span class="hljs-built_in">len</span>(row) <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> grid]
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;see&quot;</span>, see)
+
+
+        <span class="hljs-keyword">def</span> <span class="hljs-title function_">dfs</span>(<span class="hljs-params">i, j, grid</span>):
+            <span class="hljs-keyword">if</span> (i &gt;=<span class="hljs-number">0</span> <span class="hljs-keyword">and</span> i &lt; <span class="hljs-built_in">len</span>(grid) <span class="hljs-keyword">and</span> 
+                j &gt;=<span class="hljs-number">0</span> <span class="hljs-keyword">and</span> j &lt; <span class="hljs-built_in">len</span>(grid[<span class="hljs-number">0</span>])
+                ):
+                <span class="hljs-keyword">if</span> grid[i][j] == <span class="hljs-string">&quot;1&quot;</span>:
+                    see[i][j] = <span class="hljs-number">1</span>
+                <span class="hljs-keyword">else</span>:
+                    <span class="hljs-keyword">return</span>
+            <span class="hljs-keyword">else</span>:
+                <span class="hljs-keyword">return</span>
+            <span class="hljs-comment"># 下</span>
+            dfs(i+<span class="hljs-number">1</span>, j, grid)
+            <span class="hljs-comment"># 右</span>
+            dfs(i, j+<span class="hljs-number">1</span>, grid)
+
+
+        res = <span class="hljs-number">0</span>
+
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(grid)):
+            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(grid[<span class="hljs-number">0</span>])):
+                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-string">&quot;0&quot;</span> <span class="hljs-keyword">and</span> see[i][j] == <span class="hljs-number">0</span>):
+                    see[i][j] = <span class="hljs-number">1</span>
+                <span class="hljs-keyword">elif</span> (grid[i][j] == <span class="hljs-string">&quot;1&quot;</span> <span class="hljs-keyword">and</span> see[i][j] == <span class="hljs-number">0</span>):
+                    res = res + <span class="hljs-number">1</span>
+                    dfs(i, j, grid)
+                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;i:j:&quot;</span>,i,j)
+                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;see:&quot;</span>, see)
+        <span class="hljs-keyword">return</span> res
+</div></code></pre>
 
     </div>
 </body>
