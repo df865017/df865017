@@ -754,10 +754,31 @@ body {
                 <span class="hljs-comment"># print(&quot;best:&quot;, best)</span>
             best = <span class="hljs-built_in">max</span>(best, right - left + <span class="hljs-number">1</span>)
         <span class="hljs-keyword">return</span> best
+      
 </div></code></pre>
+<h5 id="104%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6" tabindex="-1">104、二叉树最大深度</h5>
+<p><a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">leetcode.cn/problems/maximum-depth-of-binary-tree</a></p>
+<p><img src="image/1.1.2递归搜索/1793260196416.png" alt="1793260196416"></p>
+<pre class='hljs'><code><div><span class="hljs-comment"># Definition for a binary tree node.</span>
+<span class="hljs-comment"># class TreeNode:</span>
+<span class="hljs-comment">#     def __init__(self, val=0, left=None, right=None):</span>
+<span class="hljs-comment">#         self.val = val</span>
+<span class="hljs-comment">#         self.left = left</span>
+<span class="hljs-comment">#         self.right = right</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">maxDepth</span>(<span class="hljs-params">self, root: TreeNode | <span class="hljs-literal">None</span></span>) -&gt; <span class="hljs-built_in">int</span>:
+        res1 = <span class="hljs-number">1</span>
+        res2 = <span class="hljs-number">1</span>
+        <span class="hljs-keyword">if</span> (root <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>): <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
+        <span class="hljs-keyword">if</span> (root.left <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>):
+            res1 = <span class="hljs-variable language_">self</span>.maxDepth(root.left) + <span class="hljs-number">1</span>
+        <span class="hljs-keyword">if</span> (root.right <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>):
+            res2 = <span class="hljs-variable language_">self</span>.maxDepth(root.right) + <span class="hljs-number">1</span>
+      
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(res1, res2)
+</div></code></pre>
+<p>3、最长无重复子串</p>
 <h5 id="3%E3%80%81%E6%9C%80%E9%95%BF%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2" tabindex="-1">3、最长无重复子串</h5>
-<h5 id="3%E3%80%81%E6%9C%80%E9%95%BF%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2-1" tabindex="-1">3、最长无重复子串</h5>
-<h5 id="3%E3%80%81%E6%9C%80%E9%95%BF%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2-2" tabindex="-1">3、最长无重复子串</h5>
 
     </div>
 </body>
