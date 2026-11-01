@@ -749,10 +749,49 @@ body {
                 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;i:&quot;</span>,i)
                 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;value:&quot;</span>, costs_sort[i][<span class="hljs-number">1</span>])
         <span class="hljs-keyword">return</span> res
-        
 </div></code></pre>
-<h5 id="3%E3%80%81%E6%9C%80%E9%95%BF" tabindex="-1">3、最长</h5>
-<h5 id="3%E3%80%81" tabindex="-1">3、</h5>
+<h5 id="630%E3%80%81%E8%AF%BE%E7%A8%8B%E8%A1%A8-iii" tabindex="-1">630、课程表 III</h5>
+<p><img src="image/1.1.3排序贪心/1793498501425.png" alt="1793498501425"></p>
+<pre class='hljs'><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:
+    <span class="hljs-keyword">import</span> heapq
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">scheduleCourse</span>(<span class="hljs-params">self, courses: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]</span>) -&gt; <span class="hljs-built_in">int</span>:
+        <span class="hljs-comment"># 1 按deadline 排序</span>
+        <span class="hljs-comment"># 2 一次加入课程</span>
+        <span class="hljs-comment"># 3.反悔贪心 </span>
+        <span class="hljs-comment">#   如果超了deadline, 回溯课程 删除最长耗时课程 （小顶堆 模拟 大顶堆）</span>
+        <span class="hljs-comment">#   如果没超deadline, 继续加入下一个课程</span>
+        heap = []
+        cost_day = <span class="hljs-number">0</span>
+        <span class="hljs-comment"># heapq.heappush(heap, -100)</span>
+        <span class="hljs-comment"># heapq.heappush(heap, -200)</span>
+        <span class="hljs-comment"># heapq.heappush(heap, -1000)</span>
+
+        <span class="hljs-comment"># print(&quot;see max:&quot;, -heap[0])</span>
+
+        <span class="hljs-comment"># maxValue = -heapq.heappop(heap)</span>
+        <span class="hljs-comment"># print(&quot;out max:&quot;,maxValue)</span>
+
+        <span class="hljs-keyword">def</span> <span class="hljs-title function_">getLastDay</span>(<span class="hljs-params">x</span>):
+            <span class="hljs-keyword">return</span> x[<span class="hljs-number">1</span>]
+        courses.sort(key=getLastDay)
+        <span class="hljs-built_in">print</span>(courses)
+
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(courses)):
+            <span class="hljs-keyword">if</span> (courses[i][<span class="hljs-number">0</span>] &gt; courses[i][<span class="hljs-number">1</span>]):
+                <span class="hljs-keyword">continue</span>
+            <span class="hljs-comment"># 可以加入课程</span>
+            <span class="hljs-keyword">if</span> (courses[i][<span class="hljs-number">0</span>] + cost_day &lt;= courses[i][<span class="hljs-number">1</span>]):  
+                cost_day += courses[i][<span class="hljs-number">0</span>]
+                heapq.heappush(heap, -courses[i][<span class="hljs-number">0</span>])
+            <span class="hljs-keyword">else</span>:
+                heapq.heappush(heap, -courses[i][<span class="hljs-number">0</span>])
+                max_duration = -heapq.heappop(heap)
+                use_duration = <span class="hljs-built_in">min</span>(courses[i][<span class="hljs-number">0</span>], max_duration)
+                cost_day += use_duration
+
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(heap)
+
+</div></code></pre>
 
     </div>
 </body>
