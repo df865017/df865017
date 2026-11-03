@@ -38,7 +38,8 @@
 
 ##### [2.2.1 Tokenization](<2.2.1%20Tokenization.html>)
 
-  电商排序不同类型/不同维度/不同长度的特征经过Tokenization后，统一转化为同一维度（例如 64/128/256）的可交互的Feature Token向量，方便后续排序模型（Transformer, RankerMixer, OneTrans）使用和运算。
+
+电商排序不同类型/不同维度/不同长度的特征经过Tokenization后，统一转化为同一维度（例如 64/128/256）的可交互的Feature Token向量，方便后续排序模型（Transformer, RankerMixer, OneTrans）使用和运算。
 
 ##### [2.2.2 Hyformer](<2.2.2%20Hyformer.html>)
 
@@ -48,4 +49,13 @@ Hyformer模型打破传统「先序列压缩、后特征交叉」的两阶段串
 
 ##### [2.2.4 Feature_Optimization](<2.2.4%20Feature_Optimization.html>)
 
+
 ---
+
+---
+
+#### 3.1 RankMixer模型系列优化
+
+
+
+##### [3.1.1 RankMixer](<3.1.1%20RankMixer.html>)
