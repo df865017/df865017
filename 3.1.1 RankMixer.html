@@ -731,7 +731,7 @@ body {
     <div class="content-wrapper">
         <h5 id="3.1.1-rankmixer" tabindex="-1"><a href="3.1.1%20RankMixer.html">3.1.1 RankMixer</a></h5>
 <h4 id="3.1.1-01-rankmixer" tabindex="-1">3.1.1-01 RankMixer</h4>
-<h5 id="2.1%E3%80%81tokenmixing" tabindex="-1">2.1、TokenMixing</h5>
+<h5 id="3.1%E3%80%81tokenmixing" tabindex="-1">3.1、TokenMixing</h5>
 <p>代码逻辑图：</p>
 <p><img src="image/3.1.1RankMixer/1793679690386.png" alt="1793679690386"></p>
 <h5 id="%EF%BC%881%EF%BC%89%E5%A4%9A%E5%A4%B4token%E7%9A%84%E6%B7%B7%E5%90%88" tabindex="-1">（1）多头token的混合</h5>
@@ -742,7 +742,7 @@ body {
 reshape -- （N，50， 300）
 per-token-ffn -- 50 * (300-600-300)</p>
 <p><img src="image/3.1.1RankMixer/1793679609106.png" alt="1793679609106"></p>
-<h5 id="%EF%BC%882%EF%BC%89pertokenffn" tabindex="-1">（2）perTokenFFN</h5>
+<h5 id="3.2%E3%80%81pertokenffn" tabindex="-1">3.2、PerTokenFFN</h5>
 <ul>
 <li>每个token有独立的权重，引入独立的两层前馈网络的FFN，隔离不同token参数，有效增加了模型参数容量。
 <ul>
@@ -752,6 +752,9 @@ per-token-ffn -- 50 * (300-600-300)</p>
 <li>共享FFN</li>
 <li><img src="image/3.1.1RankMixer/1793679256550.png" alt="1793679256550"></li>
 </ul>
+<h5 id="3.3%E3%80%81sparsemoe" tabindex="-1">3.3、SparseMoe</h5>
+<p><img src="image/3.1.1RankMixer/1793688612911.png" alt="1793688612911"></p>
+<p>SMoE主要解决的是推理耗时的问题， per-TokenFFN 会增加很多有效容量。从1* FFN参数 增加到 T ***  **FFN 的参数，SMoE主要解决是通过多个专家动态路由，例如 8 * FFN 近似得到 T*FFN的效果，全局共享专家FFN参数 和 动态路由FFN专家参数。</p>
 
     </div>
 </body>
