@@ -731,6 +731,39 @@ body {
     <div class="content-wrapper">
         <h5 id="4.1.1-gpsd" tabindex="-1"><a href="4.1.1%20GPSD.html">4.1.1 GPSD</a></h5>
 <h5 id="4.1%E3%80%81gpsd" tabindex="-1">4.1、GPSD</h5>
+<ul>
+<li>
+<p>（1）样本组织。</p>
+<ul>
+<li>正样本：第一个物品加入输入，第二个物品非空，加入标签。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>最后一个商品跳出循环continue, item_ar_laels.append(-100)</li>
+</ul>
+</li>
+<li>
+<p><img src="image/4.1.1GPSD/1793693558792.png" alt="1793693558792"></p>
+<ul>
+<li>负样本：
+<ul>
+<li><img src="image/4.1.1GPSD/1793693990120.png" alt="1793693990120"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>（2）loss计算</p>
+<ul>
+<li>相当于采样负候选，通过正样本打分和标签的CEloss拟合，计算下一个商品预估概率。</li>
+<li>loss = item_loss + cate_loss</li>
+<li>loss.backward()</li>
+<li><img src="image/4.1.1GPSD/1793694140878.png" alt="1793694140878"></li>
+</ul>
+</li>
+<li></li>
+</ul>
 
     </div>
 </body>
