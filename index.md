@@ -48,10 +48,7 @@ Hyformer模型打破传统「先序列压缩、后特征交叉」的两阶段串
 
 ##### [2.2.4 Feature_Optimization](<2.2.4%20Feature_Optimization.html>)
 
-
----
-
-3.1 RankMixer模型系列优化
+#### 3.1 RankMixer模型系列优化
 
 ##### [3.1.1 RankMixer](<3.1.1%20RankMixer.html>)
 
