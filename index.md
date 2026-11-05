@@ -54,9 +54,12 @@ Hyformer模型打破传统「先序列压缩、后特征交叉」的两阶段串
 
 ##### [3.2.1 MixFormer](<3.2.1%20MixFormer.html>)
 
+##### [3.3.1 OneTrans](<3.3.1%20OneTrans.html>)
+
+
+
 #### 4.1 模型预训练
 
 ##### [4.1.1 GPSD](<4.1.1%20GPSD.html>)
 
 ##### [4.2.1 GamerSID](<4.2.1%20GamerSID.html>)
-
